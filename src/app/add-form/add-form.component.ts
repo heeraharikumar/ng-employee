@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { EmployeeService } from '../employee.service';
 
 @Component({
@@ -10,7 +11,8 @@ import { EmployeeService } from '../employee.service';
 export class AddFormComponent implements OnInit {
   constructor(
     private _fb: FormBuilder,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private messageService: MessageService
   ) {}
 
   form!: FormGroup;
@@ -23,20 +25,31 @@ export class AddFormComponent implements OnInit {
 
   initForm() {
     this.form = this._fb.group({
-      name: [''],
-      address: [''],
-      dob: [''],
-      role: [null],
-      phoneNumber: [],
-      gender: [],
+      name: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      dob: ['', [Validators.required]],
+      role: [null, [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
+      gender: [null, [Validators.required]],
     });
   }
 
   onSubmit() {
-    const employee: any = localStorage.getItem('employees');
-    this.employeeList = JSON.parse(employee) ?? [];
-    this.employeeList = [...this.employeeList, this.form.value];
-    console.log('form', this.employeeList);
-    localStorage.setItem('employees', JSON.stringify(this.employeeList));
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.form.updateValueAndValidity();
+    } else {
+      const employee: any = localStorage.getItem('employees');
+      this.employeeList = JSON.parse(employee) ?? [];
+      this.employeeList = [...this.employeeList, this.form.value];
+      localStorage.setItem('employees', JSON.stringify(this.employeeList));
+      this.messageService.add({
+        severity: 'Success',
+        summary: 'Employee Created Successfully',
+        detail: ``,
+        life: 4500,
+      });
+      this.form.reset();
+    }
   }
 }

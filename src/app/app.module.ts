@@ -15,6 +15,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TableModule } from 'primeng/table';
 import { NgxMaskModule } from 'ngx-mask';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from "primeng/toast";
 
 @NgModule({
   declarations: [
@@ -34,9 +36,11 @@ import { NgxMaskModule } from 'ngx-mask';
     InputTextModule,
     DropdownModule,
     TableModule,
+    ToastModule,
     NgxMaskModule.forRoot(),
+   
   ],
-  providers: [],
+  providers: [ MessageService,],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

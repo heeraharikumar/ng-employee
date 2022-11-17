@@ -1,1 +1,15 @@
 <app-main-layout></app-main-layout>
+
+<p-toast
+  [preventOpenDuplicates]="true"
+  [autoZIndex]="false"
+  [autoZIndex]="true"
+>
+  <ng-template let-message pTemplate="message">
+    <div class="toast-inner">
+      <div class="flex items-center space-x-4">
+        <h6 style="word-break: break-word">{{ message.summary }}</h6>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

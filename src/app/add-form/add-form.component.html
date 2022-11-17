@@ -1,10 +1,16 @@
 <div class="container">
   <h3>Create Employee</h3>
   <div class="row" [formGroup]="form">
-    <div class="col-sm-6 field-box form-group">
+    <div
+      class="col-sm-6 field-box form-group"
+      [ngClass]="{
+        'error-input': form.get('name')?.invalid && form.get('name')?.touched
+      }"
+    >
       <input
         class="form-control"
         type="text"
+        pInputText
         placeholder="Enter Name"
         formControlName="name"
       />
@@ -14,6 +20,9 @@
         inputId="basic"
         placeholder="Select Dob"
         formControlName="dob"
+        [ngClass]="{
+          'error-input': form.get('dob')?.invalid && form.get('dob')?.touched
+        }"
       ></p-calendar>
     </div>
     <div class="col-sm-12 field-box form-group">
@@ -23,12 +32,23 @@
         formControlName="address"
         #note
         rows="4"
+        [ngClass]="{
+          'border-red-500':
+            form.get('address')?.invalid && form.get('address')?.touched
+        }"
       ></textarea>
     </div>
-    <div class="col-sm-6 field-box form-group">
+    <div
+      class="col-sm-6 field-box form-group"
+      [ngClass]="{
+        'error-input':
+          form.get('phoneNumber')?.invalid && form.get('phoneNumber')?.touched
+      }"
+    >
       <input
         class="form-control"
         type="text"
+        pInputText
         placeholder="Enter Phone Number"
         formControlName="phoneNumber"
         mask="(000) 000-0000"
@@ -43,10 +63,19 @@
         dataKey="id"
         formControlName="role"
         placeholder="Select Role"
+        [ngClass]="{
+          'error-input': form.get('role')?.invalid && form.get('role')?.touched
+        }"
       >
       </p-dropdown>
     </div>
-    <div class="col-sm-12 field-box form-group">
+    <div
+      class="col-sm-12 field-box form-group"
+      [ngClass]="{
+        'error-input':
+          form.get('gender')?.invalid && form.get('gender')?.touched
+      }"
+    >
       <p-radioButton
         label="Male"
         value="M"
