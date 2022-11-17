@@ -1,0 +1,64 @@
+<div class="container">
+  <h3>Create Employee</h3>
+  <div class="row" [formGroup]="form">
+    <div class="col-sm-6 field-box form-group">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Enter Name"
+        formControlName="name"
+      />
+    </div>
+    <div class="col-sm-6 field-box form-group">
+      <p-calendar
+        inputId="basic"
+        placeholder="Select Dob"
+        formControlName="dob"
+      ></p-calendar>
+    </div>
+    <div class="col-sm-12 field-box form-group">
+      <textarea
+        class="form-control"
+        placeholder="Enter Address"
+        formControlName="address"
+        #note
+        rows="4"
+      ></textarea>
+    </div>
+    <div class="col-sm-6 field-box form-group">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Enter Phone Number"
+        formControlName="phoneNumber"
+        mask="(000) 000-0000"
+        [clearIfNotMatch]="true"
+      />
+    </div>
+    <div class="col-sm-6 field-box form-group">
+      <p-dropdown
+        [autoDisplayFirst]="false"
+        optionLabel="value"
+        [options]="$any(allRoles$ | async)"
+        dataKey="id"
+        formControlName="role"
+        placeholder="Select Role"
+      >
+      </p-dropdown>
+    </div>
+    <div class="col-sm-12 field-box form-group">
+      <p-radioButton
+        label="Male"
+        value="M"
+        formControlName="gender"
+        [ngStyle]="{ 'padding-right': '25%' }"
+      ></p-radioButton>
+      <p-radioButton label="Female" value="F" formControlName="gender">
+      </p-radioButton>
+    </div>
+
+    <div class="col-sm-12">
+      <button class="btn btn-success" (click)="onSubmit()">Submit</button>
+    </div>
+  </div>
+</div>
